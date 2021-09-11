@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/destination_main">
+
+    <fragment
+        android:id="@+id/destination_main"
+        android:name="com.example.taipeizoo.ui.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_main_to_house"
+            app:destination="@id/destination_house" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_house"
+        android:name="com.example.taipeizoo.ui.house.HouseFragment"
+        android:label="houseFragment"
+        tools:layout="@layout/fragment_house">
+
+        <action
+            android:id="@+id/action_house_to_plant"
+            app:destination="@id/destination_plant" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_plant"
+        android:name="com.example.taipeizoo.ui.plant.PlantFragment"
+        android:label="PlantFragment"
+        tools:layout="@layout/fragment_plant" />
+
+</navigation>

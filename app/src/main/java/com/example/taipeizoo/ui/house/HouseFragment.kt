@@ -1,4 +1,4 @@
-package com.example.taipeizoo.ui.main
+package com.example.taipeizoo.ui.house
 
 import android.os.Bundle
 import android.view.View
@@ -6,13 +6,13 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
 import com.example.taipeizoo.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_house.*
 
-class MainFragment : BaseFragment(), MainContract.IMainView {
+class HouseFragment : BaseFragment(), HouseContract.IHouseView {
 
-    override val layoutRes: Int = R.layout.fragment_main
+    override val layoutRes: Int = R.layout.fragment_house
 
-    private val presenter by lazy { MainPresenter(this) }
+    private val presenter by lazy { HousePresenter(this) }
 
     private val navController by lazy { NavHostFragment.findNavController(this) }
 
@@ -21,18 +21,21 @@ class MainFragment : BaseFragment(), MainContract.IMainView {
 
         initView()
 
-        presenter.fetchHouseList()
+        presenter.fetchPlantList()
     }
 
     private fun initView() {
+        toolbar.setNavigationOnClickListener { navController.popBackStack() }
+
         button.setOnClickListener {
-            navController.navigate(R.id.action_main_to_house, bundleOf())
+            navController.navigate(R.id.action_house_to_plant, bundleOf())
         }
     }
 
     /***** Implement Interface methods *****/
 
-    override fun updateHouseListResult() {
+    override fun updatePlantListResult() {
 
     }
+
 }
