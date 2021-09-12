@@ -7,6 +7,7 @@ class MainPresenter(
 ) : BasePresenter(), MainContract.IMainPresenter {
 
     override fun fetchHouseList() {
+
         view.updateHouseListResult()
     }
 

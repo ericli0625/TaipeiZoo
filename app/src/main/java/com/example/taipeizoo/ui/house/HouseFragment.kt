@@ -8,11 +8,11 @@ import com.example.taipeizoo.R
 import com.example.taipeizoo.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_house.*
 
-class HouseFragment : BaseFragment(), HouseContract.IHouseView {
+class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
 
     override val layoutRes: Int = R.layout.fragment_house
 
-    private val presenter by lazy { HousePresenter(this) }
+    override val presenter by lazy { HousePresenter(this) }
 
     private val navController by lazy { NavHostFragment.findNavController(this) }
 
