@@ -15,12 +15,15 @@ import com.example.taipeizoo.util.Constants
 import com.example.taipeizoo.util.SpaceDividerItemDecoration
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_house.*
+import org.koin.android.ext.android.inject
 
 class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
 
     override val layoutRes: Int = R.layout.fragment_house
 
-    override val presenter by lazy { HousePresenter(this) }
+    override val presenter by lazy { HousePresenter(this, repository) }
+
+    private val repository: HouseRepository by inject()
 
     private val navController by lazy { NavHostFragment.findNavController(this) }
 
@@ -82,5 +85,9 @@ class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
         text_memo.showTextIfNotBlank(house.memo)
         text_category.text = house.category
         text_link.text = house.url
+    }
+
+    override fun showErrorSnackBar() {
+        showNetworkError()
     }
 }

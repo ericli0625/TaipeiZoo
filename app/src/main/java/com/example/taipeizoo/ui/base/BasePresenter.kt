@@ -3,9 +3,12 @@ package com.example.taipeizoo.ui.base
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BasePresenter {
+abstract class BasePresenter(private val repository: BaseRepository) {
 
     private var disposables = CompositeDisposable()
+
+    val isNetworkConnected: Boolean
+        get() = repository.isNetworkConnected
 
     fun registerObservables() {
         if (!disposables.isDisposed) disposables.dispose()

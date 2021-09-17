@@ -12,5 +12,6 @@ class HouseContract {
     interface IHouseView {
         fun updatePlantListResult(plants: List<Plant>)
         fun updateHouse(house: House)
+        fun showErrorSnackBar()
     }
 }
