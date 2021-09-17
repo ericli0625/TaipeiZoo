@@ -1,6 +1,11 @@
 package com.example.taipeizoo.model
 
+import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class PlaintInfo(
         @SerializedName("count") val count: Int,
@@ -14,6 +19,8 @@ data class PlaintInfo(
     }
 }
 
+@Parcelize
+@Entity(tableName = "plantList")
 data class Plant(
         @SerializedName("F_AlsoKnown") val alsoKnown: String,
         @SerializedName("F_Brief") val brief: String,
@@ -50,8 +57,8 @@ data class Plant(
         @SerializedName("F_pdf01_URL") val pdf01Url: String,
         @SerializedName("F_pdf02_ALT") val pdf02Alt: String,
         @SerializedName("F_pdf02_URL") val pdf02Url: String,
-        @SerializedName("_id") val id: Int
-) {
+        @PrimaryKey @ColumnInfo(name = "id") @SerializedName("_id") val id: Int
+) : Parcelable {
     val pic01Url: String
         get() = if (_pic01Url.contains("https://")) {
             _pic01Url

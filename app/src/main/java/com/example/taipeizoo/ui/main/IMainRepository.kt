@@ -8,4 +8,5 @@ import io.reactivex.Observable
 interface IMainRepository {
     fun fetchHouseList(): Observable<Response<HouseInfo>>
     suspend fun updateHouseList(data: List<House>)
+    fun getAllHouseList(): Observable<List<House>>
 }

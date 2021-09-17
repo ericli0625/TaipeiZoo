@@ -1,6 +1,6 @@
 package com.example.taipeizoo.ui.main
 
-import com.example.taipeizoo.model.HouseInfo
+import com.example.taipeizoo.model.House
 
 open class MainContract {
 
@@ -9,7 +9,7 @@ open class MainContract {
     }
 
     interface IMainView {
-        fun updateHouseListResult(data: HouseInfo)
+        fun updateHouseListResult(list: List<House>)
         fun showErrorSnackBar()
     }
 }

@@ -50,8 +50,4 @@ class PlantFragment : BaseFragment<PlantPresenter>(), PlantContract.IPlantView {
         text_feature.showTextIfNotBlank(requireContext().getString(R.string.plant_feature, plant.feature))
         text_usage.showTextIfNotBlank(requireContext().getString(R.string.plant_usage, plant.usage))
     }
-
-    override fun showErrorSnackBar() {
-        showNetworkError()
-    }
 }

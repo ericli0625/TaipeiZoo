@@ -22,4 +22,8 @@ class MainRepository : BaseRepository(), IMainRepository {
             houseInfoDao.insert(it)
         }
     }
+
+    override fun getAllHouseList(): Observable<List<House>> {
+        return houseInfoDao.getAllHouseList()
+    }
 }
