@@ -10,6 +10,9 @@ interface PlantInfoDao {
     @Query("SELECT * FROM plantList")
     fun getAllPlantList(): Observable<List<Plant>>
 
+    @Query("SELECT * FROM plantList WHERE location LIKE '%' || :name || '%' OR :name")
+    fun getTargetHousePlantList(name: String): Observable<List<Plant>>
+
     @Query("SELECT * FROM plantList WHERE nameC LIKE :name")
     fun getPlantDetail(name: String): Observable<Plant>
 

@@ -63,7 +63,9 @@ class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
 
     /***** Implement Interface methods *****/
 
-    override fun updatePlantListResult(plants: List<Plant>) {
+    override fun updatePlantListResult(plants: List<Plant>, isStopShimmer: Boolean) {
+        if (plants.isEmpty() && !isStopShimmer) return
+
         shimmer_view_container?.showShimmerAnimation(false)
         plantAdapter.updateData(plants)
     }

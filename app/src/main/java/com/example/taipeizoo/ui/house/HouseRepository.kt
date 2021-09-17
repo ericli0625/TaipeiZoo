@@ -21,6 +21,14 @@ class HouseRepository : BaseRepository(), IHouseRepository {
         return NetworkApi.sharedInstance().getPlaintList(query)
     }
 
+    override fun getTargetHousePlantList(name: String): Observable<List<Plant>> {
+        return plantInfoDao.getTargetHousePlantList(name)
+    }
+
+    override fun getHouseDetail(id: Int): Observable<House> {
+        return houseInfoDao.getHouseDetail(id)
+    }
+
     override suspend fun updatePlantList(data: List<Plant>) {
         data.map {
             plantInfoDao.insert(it)
@@ -31,7 +39,7 @@ class HouseRepository : BaseRepository(), IHouseRepository {
         return plantInfoDao.getAllPlantList()
     }
 
-    override fun getHouseDetail(id: Int): Observable<House> {
-        return houseInfoDao.getHouseDetail(id)
+    override suspend fun updatePlant(plant: Plant) {
+        plantInfoDao.insert(plant)
     }
 }
