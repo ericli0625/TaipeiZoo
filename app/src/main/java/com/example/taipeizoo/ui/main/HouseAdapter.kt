@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.taipeizoo.R
 import com.example.taipeizoo.extension.showTextIfNotBlank
 import com.example.taipeizoo.model.House
-import com.example.taipeizoo.model.HouseInfo
 import kotlinx.android.synthetic.main.component_detail_item.view.*
 
 class HouseAdapter(
@@ -21,8 +20,8 @@ class HouseAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
             holder.bind(items[position], onHouseClickListener)
 
-    fun updateData(data: HouseInfo) {
-        this.items = data.results
+    fun updateData(list: List<House>) {
+        this.items = list
         notifyDataSetChanged()
     }
 

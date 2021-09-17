@@ -17,6 +17,7 @@ val repositoryModule: Module = module {
 
     single { NetworkHelper.sharedInstance().apply { initialize(androidContext()) } }
     single { AppDatabase.getInstance(get()).houseInfo() }
+    single { AppDatabase.getInstance(get()).plantInfo() }
 }
 
 val appModule = listOf(repositoryModule)

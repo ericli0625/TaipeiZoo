@@ -10,6 +10,5 @@ class PlantContract {
 
     interface IPlantView {
         fun updatePlantDetailResult(plant: Plant)
-        fun showErrorSnackBar()
     }
 }
