@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
 import com.example.taipeizoo.model.HouseInfo
 import com.example.taipeizoo.ui.base.BaseFragment
+import com.example.taipeizoo.util.Constants
 import com.example.taipeizoo.util.SpaceDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -39,8 +40,8 @@ class MainFragment : BaseFragment<MainPresenter>(), MainContract.IMainView {
         navController.navigate(
                 R.id.action_main_to_house,
                 bundleOf(
-                        "id" to id,
-                        "name" to name
+                        Constants.HOUSE_ID to id,
+                        Constants.HOUSE_NAME to name
                 )
         )
     }

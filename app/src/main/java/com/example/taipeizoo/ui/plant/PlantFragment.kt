@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
+import com.example.taipeizoo.extension.showTextIfNotBlank
 import com.example.taipeizoo.model.Plant
 import com.example.taipeizoo.ui.base.BaseFragment
+import com.example.taipeizoo.util.Constants
 import kotlinx.android.synthetic.main.fragment_plant.*
 
 class PlantFragment : BaseFragment<PlantPresenter>(), PlantContract.IPlantView {
@@ -22,7 +24,9 @@ class PlantFragment : BaseFragment<PlantPresenter>(), PlantContract.IPlantView {
 
         initView()
 
-        presenter.fetchPlantDetail("九芎")
+        presenter.fetchPlantDetail(
+                arguments?.getString(Constants.PLANT_NAME) ?: ""
+        )
     }
 
     private fun initView() {
@@ -33,6 +37,15 @@ class PlantFragment : BaseFragment<PlantPresenter>(), PlantContract.IPlantView {
 
     override fun updatePlantDetailResult(plant: Plant) {
         Log.e("eric", " PlantFragment, updatePlantDetailResult = $plant")
+
+        image_banner.setImageURI(plant.pic01Url)
+        text_title_c.text = plant.nameC
+        text_title_e.text = plant.nameE
+
+        text_desc.showTextIfNotBlank(requireContext().getString(R.string.plant_alias, plant.alsoKnown))
+        text_brief.showTextIfNotBlank(requireContext().getString(R.string.plant_brief, plant.brief))
+        text_feature.showTextIfNotBlank(requireContext().getString(R.string.plant_feature, plant.feature))
+        text_usage.showTextIfNotBlank(requireContext().getString(R.string.plant_usage, plant.usage))
     }
 
 }

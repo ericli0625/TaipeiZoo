@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TaipeiZoo</string>
     <string name="zoo_name">台北市立動物園</string>
+    <string name="plant_alias">別名\n%s</string>
+    <string name="plant_brief">簡介\n%s</string>
+    <string name="plant_feature">辨認方式\n%s</string>
+    <string name="plant_usage">功能性\n%s</string>
 </resources>

@@ -10,6 +10,7 @@ import com.example.taipeizoo.model.House
 import com.example.taipeizoo.model.Plant
 import com.example.taipeizoo.ui.base.BaseFragment
 import com.example.taipeizoo.util.AppBarStateChangedListener
+import com.example.taipeizoo.util.Constants
 import com.example.taipeizoo.util.SpaceDividerItemDecoration
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_house.*
@@ -30,8 +31,8 @@ class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
         initView()
 
         presenter.viewReady(
-                arguments?.getInt("id") ?: 0,
-                arguments?.getString("name") ?: ""
+                arguments?.getInt(Constants.HOUSE_ID) ?: 0,
+                arguments?.getString(Constants.HOUSE_NAME) ?: ""
         )
     }
 
@@ -44,10 +45,10 @@ class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
         }
     }
 
-    private fun onPlantClicked(id: Int) {
+    private fun onPlantClicked(plantName: String) {
         navController.navigate(
                 R.id.action_house_to_plant,
-                bundleOf("id" to id)
+                bundleOf(Constants.PLANT_NAME to plantName)
         )
     }
 

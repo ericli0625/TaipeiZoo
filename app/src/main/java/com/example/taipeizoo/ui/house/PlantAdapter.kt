@@ -10,7 +10,7 @@ import com.example.taipeizoo.model.Plant
 import kotlinx.android.synthetic.main.component_detail_item.view.*
 
 class PlantAdapter(
-        private val onPlantClickListener: (id: Int) -> Unit,
+        private val onPlantClickListener: (plantName: String) -> Unit,
         private var items: List<Plant> = listOf(),
 ) : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
 
@@ -31,7 +31,7 @@ class PlantAdapter(
                     .inflate(R.layout.component_detail_item, parent, false)
     ) {
 
-        fun bind(item: Plant, onHouseClickListener: (id: Int) -> Unit) {
+        fun bind(item: Plant, onHouseClickListener: (plantName: String) -> Unit) {
 
             with(itemView) {
                 image_photo.setImageURI(item.pic01Url)
@@ -41,7 +41,7 @@ class PlantAdapter(
                 text_category.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
 
                 layout_card.setOnClickListener {
-                    onHouseClickListener(item.id)
+                    onHouseClickListener(item.nameC)
                 }
             }
         }

@@ -21,7 +21,7 @@ data class Plant(
         @SerializedName("F_Code") val code: String,
         @SerializedName("F_Family") val family: String,
         @SerializedName("F_Feature") val feature: String,
-        @SerializedName("F_Function&Application") val usage: String,
+        @SerializedName("F_Function＆Application") val usage: String,
         @SerializedName("F_Genus") val genus: String,
         @SerializedName("F_Geo") val geo: String,
         @SerializedName("F_Keywords") val keywords: String,
