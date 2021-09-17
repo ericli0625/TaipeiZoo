@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
+import com.example.taipeizoo.extension.showShimmerAnimation
 import com.example.taipeizoo.extension.showTextIfNotBlank
 import com.example.taipeizoo.model.House
 import com.example.taipeizoo.model.Plant
@@ -36,6 +37,11 @@ class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
         )
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        plantAdapter.updateData(listOf())
+    }
+
     private fun initView() {
         toolbar.setNavigationOnClickListener { navController.popBackStack() }
 
@@ -55,6 +61,7 @@ class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
     /***** Implement Interface methods *****/
 
     override fun updatePlantListResult(plants: List<Plant>) {
+        shimmer_view_container?.showShimmerAnimation(false)
         plantAdapter.updateData(plants)
     }
 

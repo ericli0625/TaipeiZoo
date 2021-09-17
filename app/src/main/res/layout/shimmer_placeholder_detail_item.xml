@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
+    android:padding="8dp">
+
+    <View
+        android:id="@+id/image_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@color/grey_ff_ea"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/text_title"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="135dp"
+        android:background="@color/grey_ff_ea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/text_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/grey_ff_ea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_icon"
+        app:layout_constraintTop_toBottomOf="@id/text_title" />
+
+    <View
+        android:id="@+id/text_subtitle_2"
+        android:layout_width="0dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="145dp"
+        android:background="@color/grey_ff_ea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_icon"
+        app:layout_constraintTop_toBottomOf="@id/text_subtitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
