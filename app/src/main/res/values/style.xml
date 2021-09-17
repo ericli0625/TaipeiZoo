@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CommonToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@color/grey_ff_ee</item>
+        <item name="toolbarStyle">@style/CommonToolbarStyle</item>
+    </style>
+
+    <!-- Toolbar -->
+    <style name="CommonToolbarStyle" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="titleTextAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="titleTextColor">@android:color/white</item>
+    </style>
+
+</resources>
