@@ -5,15 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.taipeizoo.database.dao.HouseInfoDao
+import com.example.taipeizoo.database.dao.PlantInfoDao
 import com.example.taipeizoo.model.House
+import com.example.taipeizoo.model.Plant
 
-@Database(entities = [House::class], version = 1, exportSchema = false)
+@Database(entities = [House::class, Plant::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
+
     abstract fun houseInfo(): HouseInfoDao
+    abstract fun plantInfo(): PlantInfoDao
 
     companion object {
 
-        const val DATABASE_NAME = "taipei_zoo.db"
+        private const val DATABASE_NAME = "taipei_zoo.db"
 
         @Volatile
         private var instance: AppDatabase? = null

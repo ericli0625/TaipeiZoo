@@ -5,11 +5,11 @@ import com.example.taipeizoo.model.House
 import com.example.taipeizoo.model.HouseInfo
 import com.example.taipeizoo.model.response.Response
 import com.example.taipeizoo.network.api.NetworkApi
+import com.example.taipeizoo.ui.base.BaseRepository
 import io.reactivex.Observable
-import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class MainRepository : IMainRepository, KoinComponent {
+class MainRepository : BaseRepository(), IMainRepository {
 
     private val houseInfoDao: HouseInfoDao by inject()
 
@@ -21,5 +21,9 @@ class MainRepository : IMainRepository, KoinComponent {
         data.map {
             houseInfoDao.insert(it)
         }
+    }
+
+    override fun getAllHouseList(): Observable<List<House>> {
+        return houseInfoDao.getAllHouseList()
     }
 }

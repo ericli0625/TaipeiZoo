@@ -5,19 +5,21 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
-import com.example.taipeizoo.extension.showOrHide
 import com.example.taipeizoo.extension.showShimmerAnimation
-import com.example.taipeizoo.model.HouseInfo
+import com.example.taipeizoo.model.House
 import com.example.taipeizoo.ui.base.BaseFragment
 import com.example.taipeizoo.util.Constants
 import com.example.taipeizoo.util.SpaceDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_main.*
+import org.koin.android.ext.android.inject
 
 class MainFragment : BaseFragment<MainPresenter>(), MainContract.IMainView {
 
     override val layoutRes: Int = R.layout.fragment_main
 
-    override val presenter by lazy { MainPresenter(this) }
+    override val presenter by lazy { MainPresenter(this, repository) }
+
+    private val repository: MainRepository by inject()
 
     private val navController by lazy { NavHostFragment.findNavController(this) }
 
@@ -33,7 +35,7 @@ class MainFragment : BaseFragment<MainPresenter>(), MainContract.IMainView {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        houseAdapter.updateData(HouseInfo.defaultInstance)
+        houseAdapter.updateData(listOf())
     }
 
     private fun initView() {
@@ -55,8 +57,12 @@ class MainFragment : BaseFragment<MainPresenter>(), MainContract.IMainView {
 
     /***** Implement Interface methods *****/
 
-    override fun updateHouseListResult(data: HouseInfo) {
+    override fun updateHouseListResult(list: List<House>) {
         shimmer_view_container?.showShimmerAnimation(false)
-        houseAdapter.updateData(data)
+        houseAdapter.updateData(list)
+    }
+
+    override fun showErrorSnackBar() {
+        showNetworkError()
     }
 }

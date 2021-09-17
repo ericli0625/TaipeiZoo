@@ -10,12 +10,15 @@ import com.example.taipeizoo.model.Plant
 import com.example.taipeizoo.ui.base.BaseFragment
 import com.example.taipeizoo.util.Constants
 import kotlinx.android.synthetic.main.fragment_plant.*
+import org.koin.android.ext.android.inject
 
 class PlantFragment : BaseFragment<PlantPresenter>(), PlantContract.IPlantView {
 
     override val layoutRes: Int = R.layout.fragment_plant
 
-    override val presenter by lazy { PlantPresenter(this) }
+    override val presenter by lazy { PlantPresenter(this, repository) }
+
+    private val repository: PlantRepository by inject()
 
     private val navController by lazy { NavHostFragment.findNavController(this) }
 
@@ -47,5 +50,4 @@ class PlantFragment : BaseFragment<PlantPresenter>(), PlantContract.IPlantView {
         text_feature.showTextIfNotBlank(requireContext().getString(R.string.plant_feature, plant.feature))
         text_usage.showTextIfNotBlank(requireContext().getString(R.string.plant_usage, plant.usage))
     }
-
 }

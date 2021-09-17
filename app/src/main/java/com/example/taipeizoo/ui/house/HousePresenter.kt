@@ -4,31 +4,44 @@ import com.example.taipeizoo.model.PlaintInfo
 import com.example.taipeizoo.model.Plant
 import com.example.taipeizoo.ui.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import io.reactivex.rxkotlin.Observables
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HousePresenter(
-        private val view: HouseContract.IHouseView
-) : BasePresenter(), HouseContract.IHousePresenter, KoinComponent {
-
-    private val repository: IHouseRepository by inject<HouseRepository>()
+        private val view: HouseContract.IHouseView,
+        private val repository: HouseRepository
+) : BasePresenter(repository), HouseContract.IHousePresenter {
 
     override fun viewReady(id: Int, name: String) {
-        repository.getHouseDetail(id)
+        Observables.zip(repository.getHouseDetail(id), repository.getPlantList())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWithAutoDispose(view::updateHouse)
+                .subscribeWithAutoDispose { (houseRes, plantListRes) ->
 
-        repository.fetchPlantList(name)
-                .subscribeWithAutoDispose {
-                    when {
-                        it.isSuccess -> {
-                            val data = it.data ?: PlaintInfo.defaultInstance
-                            val plantList = data.results.distinctBy(Plant::nameC)
-                            view.updatePlantListResult(plantList)
-                        }
-                        it.isNetworkUnavailable -> {
+                    view.updateHouse(houseRes)
 
-                        }
+                    if (plantListRes.isNotEmpty()) {
+                        view.updatePlantListResult(plantListRes)
+                    } else {
+                        repository.fetchPlantList(name)
+                                .subscribeWithAutoDispose { res ->
+                                    when {
+                                        res.isSuccess -> {
+                                            val data = res.data ?: PlaintInfo.defaultInstance
+                                            val plants = data.results.distinctBy(Plant::nameC)
+
+                                            GlobalScope.launch(Dispatchers.IO) {
+                                                repository.updatePlantList(data.results)
+                                            }
+
+                                            view.updatePlantListResult(plants)
+                                        }
+                                        res.isNetworkUnavailable -> {
+                                            view.showErrorSnackBar()
+                                        }
+                                    }
+                                }
                     }
                 }
     }

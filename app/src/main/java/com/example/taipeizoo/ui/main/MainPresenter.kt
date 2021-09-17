@@ -2,35 +2,40 @@ package com.example.taipeizoo.ui.main
 
 import com.example.taipeizoo.model.HouseInfo
 import com.example.taipeizoo.ui.base.BasePresenter
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class MainPresenter(
-        private val view: MainContract.IMainView
-) : BasePresenter(), MainContract.IMainPresenter, KoinComponent {
-
-    private val repository: IMainRepository by inject<MainRepository>()
+        private val view: MainContract.IMainView,
+        private val repository: MainRepository
+) : BasePresenter(repository), MainContract.IMainPresenter {
 
     override fun fetchHouseList() {
-
-        repository.fetchHouseList()
+        repository.getAllHouseList()
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWithAutoDispose {
-                    when {
-                        it.isSuccess -> {
-                            val data = it.data ?: HouseInfo.defaultInstance
+                    if (it.isNotEmpty()) {
+                        view.updateHouseListResult(it)
+                    } else {
+                        repository.fetchHouseList()
+                                .subscribeWithAutoDispose { res ->
+                                    when {
+                                        res.isSuccess -> {
+                                            val data = res.data ?: HouseInfo.defaultInstance
 
-                            GlobalScope.launch(Dispatchers.IO) {
-                                repository.updateHouseList(data.results)
-                            }
+                                            GlobalScope.launch(Dispatchers.IO) {
+                                                repository.updateHouseList(data.results)
+                                            }
 
-                            view.updateHouseListResult(data)
-                        }
-                        it.isNetworkUnavailable -> {
-
-                        }
+                                            view.updateHouseListResult(data.results)
+                                        }
+                                        res.isNetworkUnavailable -> {
+                                            view.showErrorSnackBar()
+                                        }
+                                    }
+                                }
                     }
                 }
     }
