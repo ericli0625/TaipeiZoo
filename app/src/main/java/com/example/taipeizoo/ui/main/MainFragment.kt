@@ -5,6 +5,8 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
+import com.example.taipeizoo.extension.showOrHide
+import com.example.taipeizoo.extension.showShimmerAnimation
 import com.example.taipeizoo.model.HouseInfo
 import com.example.taipeizoo.ui.base.BaseFragment
 import com.example.taipeizoo.util.Constants
@@ -29,6 +31,11 @@ class MainFragment : BaseFragment<MainPresenter>(), MainContract.IMainView {
         presenter.fetchHouseList()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        houseAdapter.updateData(HouseInfo.defaultInstance)
+    }
+
     private fun initView() {
         recycler_view.apply {
             adapter = houseAdapter
@@ -49,6 +56,7 @@ class MainFragment : BaseFragment<MainPresenter>(), MainContract.IMainView {
     /***** Implement Interface methods *****/
 
     override fun updateHouseListResult(data: HouseInfo) {
+        shimmer_view_container?.showShimmerAnimation(false)
         houseAdapter.updateData(data)
     }
 }

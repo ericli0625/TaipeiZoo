@@ -1,10 +1,10 @@
 package com.example.taipeizoo.ui.plant
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
+import com.example.taipeizoo.extension.showShimmerAnimation
 import com.example.taipeizoo.extension.showTextIfNotBlank
 import com.example.taipeizoo.model.Plant
 import com.example.taipeizoo.ui.base.BaseFragment
@@ -36,7 +36,7 @@ class PlantFragment : BaseFragment<PlantPresenter>(), PlantContract.IPlantView {
     /***** Implement Interface methods *****/
 
     override fun updatePlantDetailResult(plant: Plant) {
-        Log.e("eric", " PlantFragment, updatePlantDetailResult = $plant")
+        shimmer_view_container?.showShimmerAnimation(false)
 
         image_banner.setImageURI(plant.pic01Url)
         text_title_c.text = plant.nameC
