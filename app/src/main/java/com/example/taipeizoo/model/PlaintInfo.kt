@@ -45,7 +45,7 @@ data class Plant(
         @SerializedName("F_Pic04_ALT") val pic04Alt: String,
         @SerializedName("F_Pic04_URL") val pic04Url: String,
         @SerializedName("F_Summary") val summary: String,
-        @SerializedName("F_Update") val update: String,
+        @SerializedName("F_Update") val updateDate: String,
         @SerializedName("F_Vedio_URL") val videoUrl: String,
         @SerializedName("F_Voice01_ALT") val voice01Alt: String,
         @SerializedName("F_Voice01_URL") val voice01Url: String,

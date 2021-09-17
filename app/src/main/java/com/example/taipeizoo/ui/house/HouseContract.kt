@@ -10,7 +10,7 @@ class HouseContract {
     }
 
     interface IHouseView {
-        fun updatePlantListResult(plants: List<Plant>)
+        fun updatePlantListResult(plants: List<Plant>, isStopShimmer: Boolean = false)
         fun updateHouse(house: House)
         fun showErrorSnackBar()
     }
