@@ -7,6 +7,7 @@
     <color name="green_ff_01">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey_ff_ea">#EAEAEA</color>
     <color name="grey_ff_ee">#eeeeee</color>
     <color name="grey_ff_66">#666666</color>
     <color name="grey_ff_f6">#F6F7F9</color>
