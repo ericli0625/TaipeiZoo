@@ -13,7 +13,11 @@
 
         <action
             android:id="@+id/action_main_to_house"
-            app:destination="@id/destination_house" />
+            app:destination="@id/destination_house"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fix_center"
+            app:popEnterAnim="@anim/fix_center"
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
@@ -25,7 +29,11 @@
 
         <action
             android:id="@+id/action_house_to_plant"
-            app:destination="@id/destination_plant" />
+            app:destination="@id/destination_plant"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fix_center"
+            app:popEnterAnim="@anim/fix_center"
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
