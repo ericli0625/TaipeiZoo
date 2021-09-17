@@ -1,6 +1,7 @@
 package com.example.taipeizoo.ui.house
 
 import com.example.taipeizoo.model.PlaintInfo
+import com.example.taipeizoo.model.Plant
 import com.example.taipeizoo.ui.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
@@ -22,7 +23,8 @@ class HousePresenter(
                             view.updateHouse(houseRes)
 
                             val data = plantListRes.data ?: PlaintInfo.defaultInstance
-                            view.updatePlantListResult(data.results)
+                            val plantList = data.results.distinctBy(Plant::nameC)
+                            view.updatePlantListResult(plantList)
                         }
                         plantListRes.isNetworkUnavailable -> {
 
