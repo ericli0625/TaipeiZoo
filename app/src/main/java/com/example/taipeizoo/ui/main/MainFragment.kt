@@ -5,16 +5,21 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
+import com.example.taipeizoo.model.HouseInfo
 import com.example.taipeizoo.ui.base.BaseFragment
+import com.example.taipeizoo.util.Constants
+import com.example.taipeizoo.util.SpaceDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : BaseFragment(), MainContract.IMainView {
+class MainFragment : BaseFragment<MainPresenter>(), MainContract.IMainView {
 
     override val layoutRes: Int = R.layout.fragment_main
 
-    private val presenter by lazy { MainPresenter(this) }
+    override val presenter by lazy { MainPresenter(this) }
 
     private val navController by lazy { NavHostFragment.findNavController(this) }
+
+    private val houseAdapter by lazy { HouseAdapter(::onHouseClicked) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,14 +30,25 @@ class MainFragment : BaseFragment(), MainContract.IMainView {
     }
 
     private fun initView() {
-        button.setOnClickListener {
-            navController.navigate(R.id.action_main_to_house, bundleOf())
+        recycler_view.apply {
+            adapter = houseAdapter
+            addItemDecoration(SpaceDividerItemDecoration(8, dpFootSpace = 8, dpHeadSpace = 8))
         }
+    }
+
+    private fun onHouseClicked(id: Int, name: String) {
+        navController.navigate(
+                R.id.action_main_to_house,
+                bundleOf(
+                        Constants.HOUSE_ID to id,
+                        Constants.HOUSE_NAME to name
+                )
+        )
     }
 
     /***** Implement Interface methods *****/
 
-    override fun updateHouseListResult() {
-
+    override fun updateHouseListResult(data: HouseInfo) {
+        houseAdapter.updateData(data)
     }
 }
