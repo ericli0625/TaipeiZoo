@@ -26,13 +26,12 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
         android:nestedScrollingEnabled="false"
         android:paddingHorizontal="8dp"
         android:scrollbars="none"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:itemCount="5"
-        tools:listitem="@layout/component_house_detail" />
+        tools:listitem="@layout/component_detail_item" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

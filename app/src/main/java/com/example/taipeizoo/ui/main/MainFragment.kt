@@ -35,8 +35,14 @@ class MainFragment : BaseFragment<MainPresenter>(), MainContract.IMainView {
         }
     }
 
-    private fun onHouseClicked() {
-        navController.navigate(R.id.action_main_to_house, bundleOf())
+    private fun onHouseClicked(id: Int, name: String) {
+        navController.navigate(
+                R.id.action_main_to_house,
+                bundleOf(
+                        "id" to id,
+                        "name" to name
+                )
+        )
     }
 
     /***** Implement Interface methods *****/

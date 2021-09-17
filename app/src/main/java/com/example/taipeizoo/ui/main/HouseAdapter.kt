@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taipeizoo.R
+import com.example.taipeizoo.extension.showTextIfNotBlank
 import com.example.taipeizoo.model.House
 import com.example.taipeizoo.model.HouseInfo
-import kotlinx.android.synthetic.main.component_house_detail.view.*
+import kotlinx.android.synthetic.main.component_detail_item.view.*
 
 class HouseAdapter(
-        private val onHouseClickListener: () -> Unit,
+        private val onHouseClickListener: (id: Int, name: String) -> Unit,
         private var items: List<House> = listOf(),
 ) : RecyclerView.Adapter<HouseAdapter.ViewHolder>() {
 
@@ -27,19 +28,19 @@ class HouseAdapter(
 
     class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
             LayoutInflater.from(parent.context)
-                    .inflate(R.layout.component_house_detail, parent, false)
+                    .inflate(R.layout.component_detail_item, parent, false)
     ) {
 
-        fun bind(item: House, onHouseClickListener: () -> Unit) {
+        fun bind(item: House, onHouseClickListener: (id: Int, name: String) -> Unit) {
 
             with(itemView) {
-                image_house.setImageURI(item.picUrl)
-                text_title.text = item.name
-                text_subtitle.text = item.info
-                text_category.text = item.category
+                image_photo.setImageURI(item.picUrl)
+                text_title.showTextIfNotBlank(item.name)
+                text_subtitle.showTextIfNotBlank(item.info)
+                text_category.showTextIfNotBlank(item.category)
 
                 layout_card.setOnClickListener {
-                    onHouseClickListener()
+                    onHouseClickListener(item.id, item.name)
                 }
             }
         }

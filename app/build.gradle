@@ -78,4 +78,9 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
     implementation "org.koin:koin-androidx-ext:2.0.1"
 
+    // room
+    kapt "androidx.room:room-compiler:2.3.0"
+    implementation "androidx.room:room-runtime:2.3.0"
+    implementation "androidx.room:room-ktx:2.3.0"
+    implementation "androidx.room:room-rxjava2:2.3.0"
 }

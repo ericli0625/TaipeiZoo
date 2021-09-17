@@ -1,5 +1,6 @@
 package com.example.taipeizoo.koin
 
+import com.example.taipeizoo.database.AppDatabase
 import com.example.taipeizoo.ui.house.HouseRepository
 import com.example.taipeizoo.ui.main.MainRepository
 import com.example.taipeizoo.ui.plant.PlantRepository
@@ -12,6 +13,7 @@ val repositoryModule: Module = module {
     factory { HouseRepository() }
     factory { PlantRepository() }
 
+    single { AppDatabase.getInstance(get()).houseInfo() }
 }
 
 val appModule = listOf(repositoryModule)

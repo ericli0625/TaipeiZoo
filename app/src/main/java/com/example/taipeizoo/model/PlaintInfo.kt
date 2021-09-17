@@ -8,10 +8,14 @@ data class PlaintInfo(
         @SerializedName("offset") val offset: Int,
         @SerializedName("results") val results: List<Plant>,
         @SerializedName("sort") val sort: String
-)
+) {
+    companion object {
+        val defaultInstance = PlaintInfo(0, 0, 0, listOf(), "")
+    }
+}
 
 data class Plant(
-        @SerializedName("F_AlsoKnown") val F_AlsoKnown: String,
+        @SerializedName("F_AlsoKnown") val alsoKnown: String,
         @SerializedName("F_Brief") val brief: String,
         @SerializedName("F_CID") val cid: String,
         @SerializedName("F_Code") val code: String,
@@ -22,17 +26,17 @@ data class Plant(
         @SerializedName("F_Geo") val geo: String,
         @SerializedName("F_Keywords") val keywords: String,
         @SerializedName("F_Location") val location: String,
-        @SerializedName("F_Name_Ch") val nameC: String,
+        @SerializedName("\uFEFFF_Name_Ch") val nameC: String,
         @SerializedName("F_Name_En") val nameE: String,
         @SerializedName("F_Name_Latin") val nameLatin: String,
-        @SerializedName("F_Pic01_ALT") val F_Pic01Alt: String,
-        @SerializedName("F_Pic01_URL") val F_Pic01Url: String,
-        @SerializedName("F_Pic02_ALT") val F_Pic02Alt: String,
-        @SerializedName("F_Pic02_URL") val F_Pic02Url: String,
-        @SerializedName("F_Pic03_ALT") val F_Pic03Alt: String,
-        @SerializedName("F_Pic03_URL") val F_Pic03Url: String,
-        @SerializedName("F_Pic04_ALT") val F_Pic04Alt: String,
-        @SerializedName("F_Pic04_URL") val F_Pic04Url: String,
+        @SerializedName("F_Pic01_ALT") val pic01Alt: String,
+        @SerializedName("F_Pic01_URL") private val _pic01Url: String,
+        @SerializedName("F_Pic02_ALT") val pic02Alt: String,
+        @SerializedName("F_Pic02_URL") val pic02Url: String,
+        @SerializedName("F_Pic03_ALT") val pic03Alt: String,
+        @SerializedName("F_Pic03_URL") val pic03Url: String,
+        @SerializedName("F_Pic04_ALT") val pic04Alt: String,
+        @SerializedName("F_Pic04_URL") val pic04Url: String,
         @SerializedName("F_Summary") val summary: String,
         @SerializedName("F_Update") val update: String,
         @SerializedName("F_Vedio_URL") val videoUrl: String,
@@ -42,12 +46,19 @@ data class Plant(
         @SerializedName("F_Voice02_URL") val voice02Url: String,
         @SerializedName("F_Voice03_ALT") val voice03Alt: String,
         @SerializedName("F_Voice03_URL") val voice03Url: String,
-        @SerializedName("F_pdf01_ALT") val F_pdf01Alt: String,
-        @SerializedName("F_pdf01_URL") val F_pdf01Url: String,
-        @SerializedName("F_pdf02_ALT") val F_pdf02Alt: String,
-        @SerializedName("F_pdf02_URL") val F_pdf02Url: String,
+        @SerializedName("F_pdf01_ALT") val pdf01Alt: String,
+        @SerializedName("F_pdf01_URL") val pdf01Url: String,
+        @SerializedName("F_pdf02_ALT") val pdf02Alt: String,
+        @SerializedName("F_pdf02_URL") val pdf02Url: String,
         @SerializedName("_id") val id: Int
 ) {
+    val pic01Url: String
+        get() = if (_pic01Url.contains("https://")) {
+            _pic01Url
+        } else {
+            _pic01Url.replace("http", "https")
+        }
+
     companion object {
         val defaultInstance = Plant("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 0)
     }
