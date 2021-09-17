@@ -4,14 +4,11 @@ import com.example.taipeizoo.model.PlaintInfo
 import com.example.taipeizoo.model.Plant
 import com.example.taipeizoo.ui.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class HousePresenter(
-        private val view: HouseContract.IHouseView
-) : BasePresenter(), HouseContract.IHousePresenter, KoinComponent {
-
-    private val repository: IHouseRepository by inject<HouseRepository>()
+        private val view: HouseContract.IHouseView,
+        private val repository: HouseRepository
+) : BasePresenter(repository), HouseContract.IHousePresenter {
 
     override fun viewReady(id: Int, name: String) {
         repository.getHouseDetail(id)
@@ -27,7 +24,7 @@ class HousePresenter(
                             view.updatePlantListResult(plantList)
                         }
                         it.isNetworkUnavailable -> {
-
+                            view.showErrorSnackBar()
                         }
                     }
                 }

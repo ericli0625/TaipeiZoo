@@ -5,17 +5,13 @@ import com.example.taipeizoo.ui.base.BasePresenter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class MainPresenter(
-        private val view: MainContract.IMainView
-) : BasePresenter(), MainContract.IMainPresenter, KoinComponent {
-
-    private val repository: IMainRepository by inject<MainRepository>()
+        private val view: MainContract.IMainView,
+        private val repository: MainRepository
+) : BasePresenter(repository), MainContract.IMainPresenter {
 
     override fun fetchHouseList() {
-
         repository.fetchHouseList()
                 .subscribeWithAutoDispose {
                     when {
@@ -29,7 +25,7 @@ class MainPresenter(
                             view.updateHouseListResult(data)
                         }
                         it.isNetworkUnavailable -> {
-
+                            view.showErrorSnackBar()
                         }
                     }
                 }

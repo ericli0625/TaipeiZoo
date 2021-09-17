@@ -5,11 +5,11 @@ import com.example.taipeizoo.model.House
 import com.example.taipeizoo.model.PlaintInfo
 import com.example.taipeizoo.model.response.Response
 import com.example.taipeizoo.network.api.NetworkApi
+import com.example.taipeizoo.ui.base.BaseRepository
 import io.reactivex.Observable
-import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class HouseRepository : IHouseRepository, KoinComponent {
+class HouseRepository : BaseRepository(), IHouseRepository {
 
     private val houseInfoDao: HouseInfoDao by inject()
 

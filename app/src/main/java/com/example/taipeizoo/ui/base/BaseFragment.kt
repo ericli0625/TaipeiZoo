@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import com.example.taipeizoo.R
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment<P : BasePresenter> : Fragment() {
 
@@ -27,4 +29,30 @@ abstract class BaseFragment<P : BasePresenter> : Fragment() {
         presenter.unRegisterObservables()
     }
 
+    override fun onResume() {
+        super.onResume()
+        showNoNetworkConnectionError(presenter.isNetworkConnected)
+    }
+
+    fun showNetworkError() {
+        Snackbar.make(
+                requireView(),
+                R.string.common_error_network_system,
+                Snackbar.LENGTH_LONG
+        )
+                .setAction("OK") {}
+                .show()
+    }
+
+    private fun showNoNetworkConnectionError(isNetworkConnected: Boolean) {
+        if (isNetworkConnected) return
+
+        Snackbar.make(
+                requireView(),
+                R.string.common_error_network_connection_timeout,
+                Snackbar.LENGTH_LONG
+        )
+                .setAction("OK") {}
+                .show()
+    }
 }

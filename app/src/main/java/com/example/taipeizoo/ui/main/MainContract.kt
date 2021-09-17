@@ -10,5 +10,6 @@ open class MainContract {
 
     interface IMainView {
         fun updateHouseListResult(data: HouseInfo)
+        fun showErrorSnackBar()
     }
 }
