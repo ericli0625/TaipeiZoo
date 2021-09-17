@@ -1,9 +1,11 @@
 package com.example.taipeizoo.ui.plant
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
+import com.example.taipeizoo.model.Plant
 import com.example.taipeizoo.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_plant.*
 
@@ -20,7 +22,7 @@ class PlantFragment : BaseFragment<PlantPresenter>(), PlantContract.IPlantView {
 
         initView()
 
-        presenter.fetchPlantDetail()
+        presenter.fetchPlantDetail("九芎")
     }
 
     private fun initView() {
@@ -29,8 +31,8 @@ class PlantFragment : BaseFragment<PlantPresenter>(), PlantContract.IPlantView {
 
     /***** Implement Interface methods *****/
 
-    override fun updatePlantDetailResult() {
-
+    override fun updatePlantDetailResult(plant: Plant) {
+        Log.e("eric", " PlantFragment, updatePlantDetailResult = $plant")
     }
 
 }

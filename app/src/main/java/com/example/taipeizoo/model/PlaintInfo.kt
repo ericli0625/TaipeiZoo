@@ -47,4 +47,8 @@ data class Plant(
         @SerializedName("F_pdf02_ALT") val F_pdf02Alt: String,
         @SerializedName("F_pdf02_URL") val F_pdf02Url: String,
         @SerializedName("_id") val id: Int
-)
+) {
+    companion object {
+        val defaultInstance = Plant("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 0)
+    }
+}

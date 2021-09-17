@@ -1,12 +1,14 @@
 package com.example.taipeizoo.ui.plant
 
+import com.example.taipeizoo.model.Plant
+
 class PlantContract {
 
     interface IPlantPresenter {
-        fun fetchPlantDetail()
+        fun fetchPlantDetail(query: String)
     }
 
     interface IPlantView {
-        fun updatePlantDetailResult()
+        fun updatePlantDetailResult(plant: Plant)
     }
 }
