@@ -21,7 +21,7 @@ class HousePresenter(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWithAutoDispose { (houseRes, plantListRes) ->
                     view.updateHouse(houseRes)
-                    view.updatePlantListResult(plantListRes, false)
+                    view.updatePlantListResult(plantListRes.distinctBy(Plant::nameC))
                 }
 
         Observables.zip(repository.fetchPlantList(name), repository.getPlantList())
@@ -41,6 +41,8 @@ class HousePresenter(
     }
 
     private fun updateLatestPlantData(plantsRes: List<Plant>, plantList: List<Plant>) {
+        var isUpdateData = false
+
         plantsRes.forEach { plant ->
             val targetPlant = plantList
                     .firstOrNull { it.id == plant.id }
@@ -48,8 +50,9 @@ class HousePresenter(
 
             if (targetPlant == Plant.defaultInstance) {
                 GlobalScope.launch(Dispatchers.IO) {
-                    repository.updatePlant(plant)
+                    repository.insertPlant(plant)
                 }
+                isUpdateData = true
             } else {
                 val plantsResTime = plant.updateDate.toCalendar(DATE_PATTERN_SLASH_SEPARATE)
                 val targetPlantTime = targetPlant.updateDate.toCalendar(DATE_PATTERN_SLASH_SEPARATE)
@@ -58,9 +61,12 @@ class HousePresenter(
                     GlobalScope.launch(Dispatchers.IO) {
                         repository.updatePlant(plant)
                     }
+                    isUpdateData = true
                 }
             }
         }
-        view.updatePlantListResult(plantsRes, true)
+        if (isUpdateData || plantsRes.isEmpty()) {
+            view.updatePlantListResult(plantsRes, true)
+        }
     }
 }

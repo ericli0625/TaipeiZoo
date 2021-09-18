@@ -39,7 +39,11 @@ class HouseRepository : BaseRepository(), IHouseRepository {
         return plantInfoDao.getAllPlantList()
     }
 
-    override suspend fun updatePlant(plant: Plant) {
+    override suspend fun insertPlant(plant: Plant) {
         plantInfoDao.insert(plant)
+    }
+
+    override suspend fun updatePlant(plant: Plant) {
+        plantInfoDao.updatePlant(plant)
     }
 }

@@ -12,5 +12,6 @@ interface IHouseRepository {
     fun getHouseDetail(id: Int): Observable<House>
     suspend fun updatePlantList(data: List<Plant>)
     fun getPlantList(): Observable<List<Plant>>
+    suspend fun insertPlant(plant: Plant)
     suspend fun updatePlant(plant: Plant)
 }
