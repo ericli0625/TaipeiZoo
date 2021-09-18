@@ -21,7 +21,7 @@ class HousePresenter(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWithAutoDispose { (houseRes, plantListRes) ->
                     view.updateHouse(houseRes)
-                    view.updatePlantListResult(plantListRes, true)
+                    view.updatePlantListResult(plantListRes, false)
                 }
 
         Observables.zip(repository.fetchPlantList(name), repository.getPlantList())
