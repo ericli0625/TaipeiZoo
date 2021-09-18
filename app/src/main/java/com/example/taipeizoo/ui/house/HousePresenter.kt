@@ -24,6 +24,8 @@ class HousePresenter(
                     view.updatePlantListResult(plantListRes.distinctBy(Plant::nameC))
                 }
 
+        if (!isNetworkConnected) return view.updatePlantListResult(listOf(), true)
+
         Observables.zip(repository.fetchPlantList(name), repository.getPlantList())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWithAutoDispose { (res, plantList) ->
