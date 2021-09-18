@@ -2,6 +2,7 @@ package com.example.taipeizoo.ui.main
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import com.example.taipeizoo.R
@@ -41,6 +42,10 @@ class MainFragment : BaseFragment<MainPresenter>(), MainContract.IMainView {
     private fun initView() {
         recycler_view.apply {
             adapter = houseAdapter
+            layoutAnimation = AnimationUtils.loadLayoutAnimation(
+                    context,
+                    R.anim.layout_animation_fall_down
+            )
             addItemDecoration(SpaceDividerItemDecoration(8, dpFootSpace = 8, dpHeadSpace = 8))
         }
     }
