@@ -41,6 +41,17 @@
                     app:placeholderImage="@drawable/ic_photo_library_black"
                     app:placeholderImageScaleType="centerInside" />
 
+                <TextView
+                    android:id="@+id/text_title_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="24dp"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Title" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -57,52 +68,52 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        app:behavior_overlapTop="15dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/bg_house_detail"
             android:divider="@drawable/line_divider_middle"
             android:orientation="vertical"
-            android:paddingHorizontal="8dp"
-            android:showDividers="beginning|middle|end">
-
-            <TextView
-                android:id="@+id/text_title_c"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="TitleC" />
+            android:paddingHorizontal="16dp"
+            android:showDividers="middle|end">
 
             <TextView
                 android:id="@+id/text_title_e"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 tools:text="TitleE" />
 
             <TextView
                 android:id="@+id/text_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 tools:text="Desc" />
 
             <TextView
                 android:id="@+id/text_brief"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 tools:text="Brief" />
 
             <TextView
                 android:id="@+id/text_feature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 tools:text="Feature" />
 
             <TextView
                 android:id="@+id/text_usage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 tools:text="Usage" />
 
         </LinearLayout>
@@ -112,7 +123,8 @@
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <include layout="@layout/shimmer_placeholder_plant" />
 
