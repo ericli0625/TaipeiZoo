@@ -1,5 +1,6 @@
 # TaipeiZoo
 架構：MVP
+
 套件：Retrofit2, RxJava2, Room, Koin, Coroutine, Navigation 跟 Fresco.
 
 查看台北市立動物園所有展館的植物簡介
