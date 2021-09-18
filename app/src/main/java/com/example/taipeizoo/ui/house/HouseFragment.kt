@@ -75,6 +75,10 @@ class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
 
         app_bar.addOnOffsetChangedListener(object : AppBarStateChangedListener() {
             override fun onStateChanged(appBarLayout: AppBarLayout, state: State, offset: Int) {
+                ((appBarLayout.totalScrollRange + offset).toFloat() / appBarLayout.totalScrollRange).let {
+                    text_title.alpha = it
+                }
+
                 toolbar.title = if (state == State.COLLAPSED) {
                     house.name
                 } else {
@@ -83,6 +87,7 @@ class HouseFragment : BaseFragment<HousePresenter>(), HouseContract.IHouseView {
             }
         })
 
+        text_title.text = house.name
         text_detail.text = house.info
         text_memo.showTextIfNotBlank(house.memo)
         text_category.text = house.category
