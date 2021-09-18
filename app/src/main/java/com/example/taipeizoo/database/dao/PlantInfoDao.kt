@@ -21,4 +21,7 @@ interface PlantInfoDao {
 
     @Delete
     suspend fun delete(plant: Plant)
+
+    @Update
+    suspend fun updatePlant(plant: Plant)
 }
